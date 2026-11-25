@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## FinSight architecture
+- Use TanStack content routes with a shared financial workspace; private pages stay under the managed authenticated layout, while sample mode uses a separate public route to prevent mixing records.
+- Parse files in lazy browser imports and review transactions before saving; money calculations use integer minor units and remain independent of AI availability.
+- Keep native AI calls behind authenticated server functions, with private owner-scoped storage and database policies; never use service-role reads for ordinary app records.

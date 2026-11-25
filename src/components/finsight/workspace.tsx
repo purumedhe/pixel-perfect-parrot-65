@@ -1,0 +1,14 @@
+import {useSuspenseQuery} from '@tanstack/react-query';
+import {Shell,type View} from './shell';
+import {Overview} from './overview';
+import {UploadPage} from './upload';
+import {DocumentsPage,AnalysisPage} from './document-pages';
+import {TransactionTable} from './transactions';
+import {AssistantPage} from './assistant';
+import {ReportsPage,SettingsPage} from './secondary-pages';
+import {workspaceOptions} from '@/lib/workspace-data';
+import {sampleDocuments,getSampleTransactions} from '@/lib/sample-data';
+import {verifiedRows,type FinancialDocument,type FinancialTransaction} from '@/lib/finance';
+export function PrivateWorkspace({view,documentId,query}:{view:View;documentId?:string;query?:string}){const {data}=useSuspenseQuery(workspaceOptions);const currency=data.profile?.currency??'INR';return <Workspace view={view} documents={data.documents} rows={data.transactions} profile={data.profile} messages={data.messages} currency={currency} demo={false} {...(documentId?{documentId}:{})} {...(query?{query}:{})}/>}
+export function DemoWorkspace({view='overview',documentId,query}:{view?:View;documentId?:string;query?:string}){return <Workspace view={view} documents={sampleDocuments} rows={getSampleTransactions()} profile={null} messages={[]} currency="INR" demo {...(documentId?{documentId}:{})} {...(query?{query}:{})}/>}
+function Workspace({view,documents,rows,profile,messages,currency,demo,documentId,query}:{view:View;documents:FinancialDocument[];rows:FinancialTransaction[];profile:{id:string;display_name:string;currency:string}|null;messages:{id:string;role:string;content:string;document_id:string|null}[];currency:string;demo:boolean;documentId?:string;query?:string}){const verified=verifiedRows(rows,documents,currency);return <Shell view={view} demo={demo} name={profile?.display_name??''}>{view==='overview'?<Overview rows={verified} documents={documents} currency={currency} demo={demo}/>:view==='upload'?<UploadPage demo={demo}/>:view==='documents'?<DocumentsPage documents={documents} demo={demo}/>:view==='analysis'?<AnalysisPage documents={documents} rows={rows} currency={currency} demo={demo} {...(documentId?{selectedId:documentId}:{})}/>:view==='transactions'?<><div className="page-heading"><div><h1>Transactions</h1><p className="subtext">Every transaction, with its source and a clear financial trail.</p></div></div>{demo&&<div className="demo-banner"><strong>Sample Data – For Demonstration Only</strong></div>}<TransactionTable rows={verified} documents={documents} demo={demo} {...(query?{initialQuery:query}:{})}/></>:view==='assistant'?<AssistantPage documents={documents} messages={messages} currency={currency} demo={demo} {...(documentId?{documentId}:{})}/>:view==='reports'?<ReportsPage documents={documents} rows={verified} currency={currency} demo={demo}/>:<SettingsPage profile={profile} demo={demo}/>}</Shell>}

@@ -1,0 +1,8 @@
+# FinSight AI
+- [ ] Private accounts, profiles, storage and owner-scoped records
+- [ ] Document extraction, review and verified financial calculations
+- [ ] Overview, documents, analysis and transaction management
+- [ ] Native AI explanations and saved document-grounded chat
+- [ ] PDF/CSV reports and account settings
+- [ ] Public landing page and isolated sample-data workspace
+- [ ] Tests, real upload verification, responsive review and setup documentation
