@@ -1,10 +1,10 @@
-import {createFileRoute} from '@tanstack/react-router';
+import {createFileRoute,type SearchSchemaInput} from '@tanstack/react-router';
 import {PrivateWorkspace} from '@/components/finsight/workspace';
 import {workspaceOptions} from '@/lib/workspace-data';
 import {metadata} from '@/lib/metadata';
 export const Route=createFileRoute('/_authenticated/documents')({
  head:()=>metadata('My documents','Manage your private financial documents and verified results with FinSight AI.'),
- validateSearch:(search:Record<string,unknown>)=>({document:typeof search['document']==='string'?search['document']:'',q:typeof search['q']==='string'?search['q']:''}),
+ validateSearch:(search:SearchSchemaInput & {document?:string;q?:string})=>({document:typeof search['document']==='string'?search['document']:'',q:typeof search['q']==='string'?search['q']:''}),
  loader:({context})=>context.queryClient.ensureQueryData(workspaceOptions),
  component:Page,
 });

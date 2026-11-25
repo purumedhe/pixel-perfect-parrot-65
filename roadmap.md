@@ -6,3 +6,7 @@
 - [ ] PDF/CSV reports and account settings
 - [ ] Public landing page and isolated sample-data workspace
 - [ ] Tests, real upload verification, responsive review and setup documentation
+
+## Build repair
+- [x] Replace unavailable icon and correct optional navigation search inputs across affected pages
+- [x] Verify routing regression tests and live preview
