@@ -33,3 +33,4 @@ use the editor.
 - Use TanStack content routes with a shared financial workspace; private pages stay under the managed authenticated layout, while sample mode uses a separate public route to prevent mixing records.
 - Parse files in lazy browser imports and review transactions before saving; money calculations use integer minor units and remain independent of AI availability.
 - Keep native AI calls behind authenticated server functions, with private owner-scoped storage and database policies; never use service-role reads for ordinary app records.
+- Normalize nullable extracted transaction text at review and table boundaries; missing dates and descriptions must remain empty and visible for correction, not invented.

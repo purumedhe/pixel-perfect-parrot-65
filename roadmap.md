@@ -10,3 +10,7 @@
 ## Build repair
 - [x] Replace unavailable icon and correct optional navigation search inputs across affected pages
 - [x] Verify routing regression tests and live preview
+
+## Runtime repair
+- [x] Handle nullable extracted dates and descriptions in transaction review and sorting
+- [x] Verify regression tests and the private analysis page
